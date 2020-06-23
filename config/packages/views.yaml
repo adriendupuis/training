@@ -1,0 +1,23 @@
+ezdesign:
+    design_list:
+        bike_ride: [bike_ride, simple]
+
+ezplatform:
+    system:
+        site:
+            design: bike_ride
+            pagelayout: '@ezdesign/pagelayout.html.twig'
+            content_view:
+                full:
+                    bike_ride:
+                        template: "@ezdesign/full/bike_ride.html.twig"
+                        match:
+                            Identifier\ContentType: [bike_ride]
+                    simple:
+                        template: "@ezdesign/full/simple.html.twig"
+                        match: true
+                modal:
+                    point_of_interest:
+                        template: "@ezdesign/modal/point_of_interest.html.twig"
+                        match:
+                            Identifier\ContentType: [point_of_interest]

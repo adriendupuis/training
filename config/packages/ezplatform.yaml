@@ -1,3 +1,7 @@
+imports:
+    - { resource: views.yaml }
+    - { resource: image_variations.yaml }
+
 parameters:
     locale_fallback: en
 
@@ -87,14 +91,14 @@ ezplatform:
                     directories: 0775 #default is 0755
 
         site:
-            languages: [eng-GB]
+            languages: [eng-GB, fre-FR]
 
         admin_group:
             # System languages. Note that by default, content, content types, and other data are in eng-GB locale,
             # so removing eng-GB from this list may lead to errors or content not being shown, unless you change
             # all eng-GB data to other locales first.
             # For admin this needs to contain all languages you want to translate content to on the given repository.
-            languages: [eng-GB]
+            languages: [eng-GB, fre-FR]
             page_builder:
                 siteaccess_list: [site]
             content_tree_module:

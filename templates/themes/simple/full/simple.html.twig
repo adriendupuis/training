@@ -1,0 +1,13 @@
+{% extends '@ezdesign/pagelayout.html.twig' %}
+{% block meta_title %}
+    {{ ez_field_value(content, 'title') }}
+{% endblock %}
+{% block content %}
+{#    {{ dump(content) }}#}
+{#    {{ dump(location) }}#}
+    {{ ez_render_field(content, 'title') }}
+    {{ ez_render_field(content, 'photo') }}
+    {{ ez_render_field(content, 'description') }}
+    {{ dump(ez_field_value(content, 'description')) }}
+    {{ ez_content_name(content) }}
+{% endblock %}
