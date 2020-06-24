@@ -18,6 +18,7 @@ class PointOfInterestController extends AbstractController
 
     public function pointOfInterestView(ContentView $view): ContentView
     {
+        // WARNING: Anonymous role must have Content / Reverserelatedlist policy
         $reverseRelations = $this->contentService->loadReverseRelations($view->getContent()->contentInfo);
 
         $rideContentInfoList = [];
