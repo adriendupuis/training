@@ -5,4 +5,10 @@ ezplatform:
                 bike_ride_main:
                     reference: ~
                     filters:
-                        - { name: geometry/scaledownonly, params: [200, 200] }
+                        - { name: geometry/scaledownonly, params: [300, 240] }
+                modal_thumbnail:
+                    reference: ~
+                    filters:
+                        - { name: geometry/scaleheight, params: [126] }
+                        - { name: geometry/crop, params: [150, 126, 0, 0] }
+                        - { name: colorspace/gray }
