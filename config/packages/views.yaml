@@ -13,6 +13,11 @@ ezplatform:
                         template: "@ezdesign/full/bike_ride.html.twig"
                         match:
                             Identifier\ContentType: [bike_ride]
+                    point_of_interest:
+                        controller: App\Controller\PointOfInterestController::pointOfInterestView
+                        template: "@ezdesign/full/point_of_interest.html.twig"
+                        match:
+                            Identifier\ContentType: [point_of_interest]
                     simple:
                         template: "@ezdesign/full/simple.html.twig"
                         match: true
