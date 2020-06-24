@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use eZ\Publish\API\Repository\ContentService;
-use eZ\Publish\API\Repository\Values\Content\Relation;
 use eZ\Publish\Core\MVC\Symfony\View\ContentView;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -42,6 +41,7 @@ class PointOfInterestController extends AbstractController
         $view->addParameters([
             'rides' => $rides,
         ]);
+
         return $view;
     }
 }
