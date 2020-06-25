@@ -9,6 +9,18 @@ ezplatform:
             pagelayout: '@ezdesign/pagelayout.html.twig'
             content_view:
                 full:
+                    all_rides:
+                        controller: ez_query:contentQueryAction
+                        template: "@ezdesign/full/all_rides.html.twig"
+                        match:
+                            Id\Location: 2
+                        params:
+                            query:
+                                query_type: BikeRideList
+                                parameters:
+                                    contentType: bike_ride
+                                    #parentLocationId: 56
+                                assign_results_to: bike_ride_list
                     bike_ride:
                         template: "@ezdesign/full/bike_ride.html.twig"
                         match:
@@ -21,6 +33,11 @@ ezplatform:
                     simple:
                         template: "@ezdesign/full/simple.html.twig"
                         match: true
+                line:
+                    bike_ride:
+                        template: "@ezdesign/line/bike_ride.html.twig"
+                        match:
+                            Identifier\ContentType: [bike_ride]
                 modal:
                     point_of_interest:
                         template: "@ezdesign/modal/point_of_interest.html.twig"
