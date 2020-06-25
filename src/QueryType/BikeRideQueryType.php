@@ -21,6 +21,10 @@ class BikeRideQueryType implements QueryType
             $criteria[] = new Query\Criterion\ParentLocationId($parameters['parentLocationId']);
         }
 
+        if (!empty($parameters['searchText'])) {
+            $criteria[] = new Query\Criterion\FullText($parameters['searchText']);
+        }
+
         return new Query([
             'filter' => new Query\Criterion\LogicalAnd($criteria),
             'performCount' => $parameters['count'] ?? false,
@@ -29,7 +33,7 @@ class BikeRideQueryType implements QueryType
 
     public function getSupportedParameters(): array
     {
-        return ['contentType', 'parentLocationId', 'count'];
+        return ['contentType', 'parentLocationId', 'count', 'searchText'];
     }
 
     public static function getName(): string

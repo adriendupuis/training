@@ -30,3 +30,7 @@ services:
     App\Command\CreateContentCommand:
         arguments:
             $importUser: 'admin'
+
+    App\Controller\SearchController:
+        arguments:
+            $queryTypeRegistry: '@ezpublish.query_type.registry'
