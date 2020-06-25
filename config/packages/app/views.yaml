@@ -33,11 +33,6 @@ ezplatform:
                     simple:
                         template: "@ezdesign/full/simple.html.twig"
                         match: true
-                line:
-                    bike_ride:
-                        template: "@ezdesign/line/bike_ride.html.twig"
-                        match:
-                            Identifier\ContentType: [bike_ride]
                 modal:
                     point_of_interest:
                         template: "@ezdesign/modal/point_of_interest.html.twig"
