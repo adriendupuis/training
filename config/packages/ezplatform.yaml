@@ -1,6 +1,5 @@
 imports:
-    - { resource: views.yaml }
-    - { resource: image_variations.yaml }
+    - { resource: app/* }
 
 parameters:
     locale_fallback: en
