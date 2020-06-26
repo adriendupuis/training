@@ -2,48 +2,48 @@
 
 namespace App\Controller;
 
-use eZ\Publish\API\Repository\Values\Content\Relation;
+use eZ\Publish\API\Repository\SearchService;
+use eZ\Publish\API\Repository\Values\Content\Content;
+use eZ\Publish\API\Repository\Values\Content\Query;
+use eZ\Publish\API\Repository\Values\Content\Search\SearchHit;
 use eZ\Publish\Core\MVC\Symfony\View\ContentView;
-use eZ\Publish\Core\Repository\SiteAccessAware\Repository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PointOfInterestController extends AbstractController
 {
-    /** @var Repository */
-    private $repository;
+    /** @var SearchService */
+    private $searchService;
 
-    public function __construct(Repository $repository)
+    public function __construct(SearchService $searchService)
     {
-        $this->repository = $repository;
+        $this->searchService = $searchService;
     }
 
     public function pointOfInterestView(ContentView $view): ContentView
     {
-        $reverseRelations = $this->repository->sudo(function (Repository $repository) use ($view) {
-            return $repository->getContentService()->loadReverseRelations($view->getContent()->contentInfo);
-        });
+        $currentContent = $view->getContent();
 
-        $rideContentInfoList = [];
+        $query = new Query([
+            'filter' => new Query\Criterion\LogicalAnd([
+                new Query\Criterion\ContentTypeIdentifier('bike_ride'),
+                new Query\Criterion\Visibility(Query\Criterion\Visibility::VISIBLE),
+                new Query\Criterion\FieldRelation('pois', Query\Criterion\Operator::CONTAINS, [$currentContent->id]),
+            ]),
+            'performCount' => false,
+        ]);
+        $rideSearchHits = $this->searchService->findContent($query)->searchHits;
 
-        /** @var Relation $relation */
-        foreach ($reverseRelations as $relation) {
-            $sourceContentInfo = $relation->getSourceContentInfo();
+        $rides = [];
+        foreach ($rideSearchHits as $searchHit) {
+            /** @var Content $ride */
+            $ride = $searchHit->valueObject;
 
-            if ($sourceContentInfo->isHidden || !$sourceContentInfo->isPublished()) {
+            if (!$ride->contentInfo->isPublished()) {
                 continue;
             }
 
-            if ('bike_ride' !== $sourceContentInfo->getContentType()->identifier) {
-                continue;
-            }
-
-            // Because previously loaded with sudo, make sure that the user can read it.
-            if ($this->repository->getPermissionResolver()->canUser('content', 'read', $sourceContentInfo)) {
-                $rideContentInfoList[] = $sourceContentInfo;
-            }
+            $rides[] = $ride;
         }
-
-        $rides = $this->repository->getContentService()->loadContentListByContentInfo($rideContentInfoList);
 
         $view->addParameters([
             'rides' => $rides,
