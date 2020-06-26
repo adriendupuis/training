@@ -1,0 +1,7 @@
+ezplatform_page_fieldtype:
+    blocks:
+        contentlist:
+            views:
+                bike_ride_list:
+                    name: 'Bike ride list of links'
+                    template: '@ezdesign/blocks/contentlist.html.twig'

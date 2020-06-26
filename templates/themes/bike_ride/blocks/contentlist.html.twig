@@ -1,0 +1,12 @@
+<h2>{{ parentName }}</h2>
+
+<ul>
+    {% for item in contentArray %}
+        <li>
+            {# {{ dump(item) }} #}
+            <a href="{{ path('ez_urlalias', { 'locationId': item.location.id }) }}">
+                {{ ez_content_name(item.content) }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
