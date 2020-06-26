@@ -13,3 +13,6 @@ ezplatform_page_fieldtype:
                 default:
                     name: 'Default'
                     template: '@ezdesign/blocks/random.html.twig'
+                card:
+                    name: 'Card'
+                    template: '@ezdesign/blocks/random_card.html.twig'
