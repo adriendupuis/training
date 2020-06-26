@@ -34,9 +34,11 @@ class RandomEventSubscriber implements EventSubscriberInterface
         $renderRequest = $event->getRenderRequest();
         $parameters = $renderRequest->getParameters();
 
+        $blockValue = $event->getBlockValue();
+
         $query = new Query([
             'filter' => new Query\Criterion\LogicalAnd([
-                new Query\Criterion\ContentTypeIdentifier('bike_ride'),
+                new Query\Criterion\ContentTypeIdentifier($blockValue->getAttribute('content_type')->getValue()),
                 new Query\Criterion\Visibility(Query\Criterion\Visibility::VISIBLE),
             ]),
             'sortClauses' => [new Query\SortClause\Random(),],

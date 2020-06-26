@@ -16,3 +16,14 @@ ezplatform_page_fieldtype:
                 card:
                     name: 'Card'
                     template: '@ezdesign/blocks/random_card.html.twig'
+            attributes:
+                content_type:
+                    name: Select type of content to display
+                    value: bike_ride
+                    #type: contenttypelist
+                    type: select
+                    options:
+                        multiple: false
+                        choices:
+                            'Bike Ride': bike_ride
+                            'Point of interest': point_of_interest
