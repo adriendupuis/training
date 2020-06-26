@@ -2,6 +2,7 @@
 
 namespace App\EventSubscriber;
 
+use eZ\Publish\API\Repository\Values\Content\Query;
 use EzSystems\EzPlatformPageFieldType\FieldType\Page\Block\Renderer\BlockRenderEvents;
 use EzSystems\EzPlatformPageFieldType\FieldType\Page\Block\Renderer\Event\PreRenderEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -32,7 +33,20 @@ class RandomEventSubscriber implements EventSubscriberInterface
     public function onBlockPreRender(PreRenderEvent $event)
     {
         $renderRequest = $event->getRenderRequest();
+        $parameters = $renderRequest->getParameters();
 
-        $renderRequest->setParameters(['hello' => 'world']);
+        $query = new Query([
+            'filter' => new Query\Criterion\LogicalAnd([
+                new Query\Criterion\ContentTypeIdentifier('bike_ride'),
+                new Query\Criterion\Visibility(Query\Criterion\Visibility::VISIBLE),
+            ]),
+            'sortClauses' => [new Query\SortClause\Random(),],
+            'limit' => 1,
+        ]);
+
+        $searchHits = $this->searchService->findContent($query)->searchHits;
+
+        $parameters['random'] = count($searchHits) ? $searchHits[0]->valueObject : null;
+        $renderRequest->setParameters($parameters);
     }
 }
