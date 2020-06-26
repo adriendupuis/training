@@ -5,3 +5,11 @@ ezplatform_page_fieldtype:
                 bike_ride_list:
                     name: 'Bike ride list of links'
                     template: '@ezdesign/blocks/contentlist.html.twig'
+        random:
+            name: Random Content
+            thumbnail: ''
+            category: 'training'
+            views:
+                default:
+                    name: 'Default'
+                    template: '@ezdesign/blocks/random.html.twig'
