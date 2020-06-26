@@ -8,7 +8,6 @@ use EzSystems\EzPlatformPageFieldType\FieldType\Page\Block\Renderer\Event\PreRen
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use eZ\Publish\API\Repository\SearchService;
 
-
 class RandomEventSubscriber implements EventSubscriberInterface
 {
     /** @var SearchService */
