@@ -13,14 +13,18 @@ ezplatform:
                         controller: ez_query:contentQueryAction
                         template: "@ezdesign/full/all_rides.html.twig"
                         match:
-                            Id\Location: 2
+                            Id\Location: 56
                         params:
                             query:
                                 query_type: BikeRideList
                                 parameters:
                                     contentType: bike_ride
-                                    #parentLocationId: 56
+                                    parentLocationId: '@=location.id'
                                 assign_results_to: bike_ride_list
+                    landing_page:
+                        template: "@ezdesign/full/landing_page.html.twig"
+                        match:
+                            Identifier\ContentType: [landing_page]
                     bike_ride:
                         template: "@ezdesign/full/bike_ride.html.twig"
                         match:
